@@ -1,0 +1,396 @@
+{
+  "name": "My workflow",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "triggerAtHour": 10
+            }
+          ]
+        }
+      },
+      "id": "d4b4bbdf-e5f7-4396-905d-34b391385078",
+      "name": "Schedule Trigger",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.3,
+      "position": [
+        -896,
+        -176
+      ]
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1azr3gS5riEkmlWe-J6zTN5M9mf0GykASXbWNZaeehvA",
+          "mode": "list",
+          "cachedResultName": "daily workflow ekatva",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1azr3gS5riEkmlWe-J6zTN5M9mf0GykASXbWNZaeehvA/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1azr3gS5riEkmlWe-J6zTN5M9mf0GykASXbWNZaeehvA/edit#gid=0"
+        },
+        "filtersUI": {
+          "values": [
+            {
+              "lookupColumn": "Status",
+              "lookupValue": "pending"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "9019e54c-3204-4f5d-8237-60572bf3ba88",
+      "name": "Get row(s) in sheet",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -672,
+        -176
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "ns9Oaz8YfBi653Kp",
+          "name": "Google Sheets account 3"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "phone-not-empty",
+              "leftValue": "={{ ($json['Phone Number'] || '').toString().trim() }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEquals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "998a9d40-9a21-40a8-ae73-050947521706",
+      "name": "Has Phone Number",
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2.2,
+      "position": [
+        -448,
+        -176
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.green-api.com/waInstance710722701785/sendFileByUrl/1c71294b656d4241b925ed95a6b3275a5a5b33ef71334223ae",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"chatId\": \"{{ $json['Phone Number'] }}@c.us\",\n  \"urlFile\": \"https://drive.google.com/uc?export=download&id=1QHa5PqGLf7QyXVoJQcRgw49AKm4cgF01\",\n  \"fileName\": \"Ekatva_Smart_Tank_Monitoring_Catalogue.pdf\",\n  \"caption\": \"Hello Sir,\\n\\nMy Name is Tirth, I am the global marketing executive at Ekatva Technovation LLP, Gujrat,India. where we provide Smart Tank Monitoring Solutions that help companies monitor fuel, oil, diesel, chemical, and water tank levels remotely in real time.\\n\\nI wanted to know if {{ $json['Company Name'] }} in {{ $json['City'] }} currently uses any tank monitoring system. I have attached our catalogue for more information I'd be happy to share a brief overview.\\n\\nPlease let me know what is the best time to get on a call to discuss your requirements.\"\n}",
+        "options": {}
+      },
+      "id": "7af881a5-44ef-4bae-bc8d-076b41522dee",
+      "name": "HTTP Request",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        -224,
+        -176
+      ]
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "whatsapp-inbound",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -944,
+        80
+      ],
+      "id": "714eaa1e-d514-458d-a57c-4562e28ff01d",
+      "name": "Webhook",
+      "webhookId": "7b0aea2b-8e13-4921-951d-ba61251383fd",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.body?.messageData?.textMessageData?.textMessage || $json.body?.messageData?.extendedTextMessageData?.text || $json.body?.message || \"Hello\" }}",
+        "options": {
+          "systemMessage": "u are Tirth, a professional sales and marketing team member at Ekatva Technovation LLP.\n\nSTRICT IDENTITY RULES:\n1. NEVER mention or admit that you are an AI, bot, virtual assistant, or automated system. Speak strictly as a human professional named Tirth.\n2. Maintain a friendly, professional, and helpful conversational tone.\n3. Keep technical details simple and high-level. Do NOT output full technical specification sheets or raw VEGAPULS 21 datasheets unless specifically requested. Focus on benefits (real-time level tracking, temperature/pressure alerts, web & mobile app access).\n\nCONVERSATION & SALES FLOW:\n1. Always address the client politely and end your helpful responses with a gentle inquiry like: \"Do you have any current requirement for smart tank monitoring at your facility, sir?\" or \"Would you like to explore this for your plant, sir?\"\n2. If the prospect/client shows interest or asks for deeper technical integration/pricing details to move forward in the process, proactively offer a call: \"I would love to arrange a short quick call to discuss your specific tank setup and requirements. When would be a good time to connect over a call, sir?\"\n3. Answer user questions strictly based on the KNOWLEDGE BASE provided below. If a question is outside the knowledge base, politely guide them: \"Let me check the exact custom configuration for this. You can also directly reach my team/support at +91 99987 68805.\"\n\nCRM / STATUS LOGIC INSTRUCTIONS:\n- If the prospect explicitly says \"No\", \"Not interested\", or declines the requirement: Include the flag `[STATUS: CLOSED]` at the end of your response so the system updates their status to Closed in the master sheet.\n- If the message is left open or in discussion, treat their status internally as `[STATUS: PENDING]`."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        -480,
+        64
+      ],
+      "id": "eb94a115-f4d8-4ea9-ba08-dc8cd85a002e",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $json.body?.senderData?.chatId || $json.body?.chatId || $json.body?.from || \"default_test_user\" }}",
+        "contextWindowLength": 3
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.4,
+      "position": [
+        -432,
+        256
+      ],
+      "id": "cb3a0648-c905-4a3b-a309-d6739cf715b8",
+      "name": "Simple Memory",
+      "retryOnFail": false
+    },
+    {
+      "parameters": {
+        "model": "llama-3.1-8b-instant",
+        "options": {
+          "maxTokensToSample": 400
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGroq",
+      "typeVersion": 1,
+      "position": [
+        -592,
+        304
+      ],
+      "id": "3be00d70-9edc-4dcc-b4c5-15ed53c84477",
+      "name": "Groq Chat Model",
+      "credentials": {
+        "groqApi": {
+          "id": "GqQaGfL98UDCFf4j",
+          "name": "Groq account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "descriptionType": "manual",
+        "toolDescription": "Use this tool to search product details, technical specifications, and prices from the sheet based on user query.\"\n(AI isi description ko padhkar decide karta hai ki sheet mein kya search karna hai).",
+        "documentId": {
+          "__rl": true,
+          "value": "1azr3gS5riEkmlWe-J6zTN5M9mf0GykASXbWNZaeehvA",
+          "mode": "list",
+          "cachedResultName": "daily workflow ekatva",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1azr3gS5riEkmlWe-J6zTN5M9mf0GykASXbWNZaeehvA/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 947504439,
+          "mode": "list",
+          "cachedResultName": "Sheet2",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1azr3gS5riEkmlWe-J6zTN5M9mf0GykASXbWNZaeehvA/edit#gid=947504439"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheetsTool",
+      "typeVersion": 4.7,
+      "position": [
+        -272,
+        320
+      ],
+      "id": "d5d4ba53-61ec-4113-a200-9722c41d45a2",
+      "name": "Get row(s) in sheet in Google Sheets",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "ns9Oaz8YfBi653Kp",
+          "name": "Google Sheets account 3"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "e5c421e3-1d5d-4bda-857f-84d4fcbf354b",
+              "leftValue": "={{ $json.body.senderData.chatId }}",
+              "rightValue": "@c.us",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        -720,
+        80
+      ],
+      "id": "8b6f4898-42f2-4ecd-9b4c-0fc41956359a",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.green-api.com/waInstance710722701785/sendMessage/1c71294b656d4241b925ed95a6b3275a5a5b33ef71334223ae",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"chatId\": \"{{ $('Webhook').first().json.body.senderData.chatId }}\",\n  \"message\": \"{{ $json.output }}\"\n} ",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        -96,
+        96
+      ],
+      "id": "8d25dcec-02d6-4f92-8763-61654129be8a",
+      "name": "HTTP Request2"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "Get row(s) in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get row(s) in sheet": {
+      "main": [
+        [
+          {
+            "node": "Has Phone Number",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Has Phone Number": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Groq Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get row(s) in sheet in Google Sheets": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [],
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        []
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "a447560a-4176-4936-a31a-8c25159e6da2",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "ea9d2983b127b8c61e6f34534bd7a101fd62dc209348535e812cc04562f3154f"
+  },
+  "nodeGroups": [],
+  "id": "u0nzh0wNGBrBmrPJ",
+  "tags": []
+}
