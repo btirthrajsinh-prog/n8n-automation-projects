@@ -1,0 +1,69 @@
+{
+  "name": "gmail trigger",
+  "nodes": [
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        },
+        "simple": false,
+        "filters": {
+          "readStatus": "unread"
+        },
+        "options": {}
+      },
+      "id": "521ea5fc-8e96-4502-b2b5-a5f9dbffc7f3",
+      "name": "Gmail Trigger",
+      "type": "n8n-nodes-base.gmailTrigger",
+      "typeVersion": 1.4,
+      "position": [
+        0,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "sendRichMessage",
+        "chatId": "YOUR_TELEGRAM_CHAT_ID",
+        "richMessageText": "=📧 <b>New Email</b>\n<b>From:</b> {{ $json.from }}\n<b>Subject:</b> {{ $json.subject }}\n\n{{ ($json.text || $json.snippet || \"\").slice(0, 3500) }}",
+        "additionalFields": {}
+      },
+      "id": "3518e218-2c12-445c-b9d8-d24521d79789",
+      "name": "Send a rich message",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        224,
+        0
+      ]
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Gmail Trigger": {
+      "main": [
+        [
+          {
+            "node": "Send a rich message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false,
+    "timeSavedMode": "fixed",
+    "callerPolicy": "workflowsFromSameOwner"
+  },
+  "nodeGroups": [],
+  "tags": []
+}
