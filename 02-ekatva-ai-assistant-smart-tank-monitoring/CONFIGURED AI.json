@@ -1,0 +1,147 @@
+{
+  "name": "CONFIGURED AI",
+  "nodes": [
+    {
+      "parameters": {
+        "public": true,
+        "authentication": "basicAuth",
+        "initialMessages": "=Hello! I'm Ekatva AI — your technical assistant for electronics and \nrobotics support. How can I help you today?",
+        "options": {
+          "allowFileUploads": true,
+          "inputPlaceholder": "Type your question..",
+          "showWelcomeScreen": true,
+          "subtitle": "Ekatva AI — Electronics & Robotics Assistant",
+          "title": "Ekatva AI 24X7",
+          "customCss": ":root {\n  /* Colors */\n  --chat--color--primary: #e74266;\n  --chat--color--primary-shade-50: #db4061;\n  --chat--color--primary--shade-100: #cf3c5c;\n  --chat--color--secondary: #20b69e;\n  --chat--color-secondary-shade-50: #1ca08a;\n  --chat--color-white: #fff;\n  --chat--color-light: #f2f4f8;\n  --chat--color-light-shade-50: #e6e9f1;\n  --chat--color-light-shade-100: #c2c5cc;\n  --chat--color-medium: #d2d4d9;\n  --chat--color-dark: #101330;\n  --chat--color-disabled: #d2d4d9;\n  --chat--color-typing: #404040;\n\n  /* Base Layout */\n  --chat--spacing: 1rem;\n  --chat--border-radius: 0.25rem;\n  --chat--transition-duration: 0.15s;\n  --chat--font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;\n\n  /* Window Dimensions */\n  --chat--window--width: 400px;\n  --chat--window--height: 600px;\n  --chat--window--bottom: var(--chat--spacing);\n  --chat--window--right: var(--chat--spacing);\n  --chat--window--z-index: 9999;\n  --chat--window--border: 1px solid var(--chat--color-light-shade-50);\n  --chat--window--border-radius: var(--chat--border-radius);\n  --chat--window--margin-bottom: var(--chat--spacing);\n\n  /* Header Styles */\n  --chat--header-height: auto;\n  --chat--header--padding: var(--chat--spacing);\n  --chat--header--background: var(--chat--color-dark);\n  --chat--header--color: var(--chat--color-light);\n  --chat--header--border-top: none;\n  --chat--header--border-bottom: none;\n  --chat--header--border-left: none;\n  --chat--header--border-right: none;\n  --chat--heading--font-size: 2em;\n  --chat--subtitle--font-size: inherit;\n  --chat--subtitle--line-height: 1.8;\n\n  /* Message Styles */\n  --chat--message--font-size: 1rem;\n  --chat--message--padding: var(--chat--spacing);\n  --chat--message--border-radius: var(--chat--border-radius);\n  --chat--message-line-height: 1.5;\n  --chat--message--margin-bottom: calc(var(--chat--spacing) * 1);\n  --chat--message--bot--background: var(--chat--color-white);\n  --chat--message--bot--color: var(--chat--color-dark);\n  --chat--message--bot--border: none;\n  --chat--message--user--background: var(--chat--color--secondary);\n  --chat--message--user--color: var(--chat--color-white);\n  --chat--message--user--border: none;\n  --chat--message--pre--background: rgba(0, 0, 0, 0.05);\n  --chat--messages-list--padding: var(--chat--spacing);\n\n  /* Toggle Button */\n  --chat--toggle--size: 64px;\n  --chat--toggle--width: var(--chat--toggle--size);\n  --chat--toggle--height: var(--chat--toggle--size);\n  --chat--toggle--border-radius: 50%;\n  --chat--toggle--background: var(--chat--color--primary);\n  --chat--toggle--hover--background: var(--chat--color--primary-shade-50);\n  --chat--toggle--active--background: var(--chat--color--primary--shade-100);\n  --chat--toggle--color: var(--chat--color-white);\n\n  /* Input Area */\n  --chat--textarea--height: 50px;\n  --chat--textarea--max-height: 30rem;\n  --chat--input--font-size: inherit;\n  --chat--input--border: 0;\n  --chat--input--border-radius: 0;\n  --chat--input--padding: 0.8rem;\n  --chat--input--background: var(--chat--color-white);\n  --chat--input--text-color: initial;\n  --chat--input--line-height: 1.5;\n  --chat--input--placeholder--font-size: var(--chat--input--font-size);\n  --chat--input--border-active: 0;\n  --chat--input--left--panel--width: 2rem;\n\n  /* Button Styles */\n  --chat--button--padding: calc(var(--chat--spacing) * 5 / 8) var(--chat--spacing);\n  --chat--button--border-radius: var(--chat--border-radius);\n  --chat--button--font-size: 1rem;\n  --chat--button--line-height: 1;\n  --chat--button--color--primary: var(--chat--color-light);\n  --chat--button--background--primary: var(--chat--color--secondary);\n  --chat--button--border--primary: none;\n  --chat--button--color--primary--hover: var(--chat--color-light);\n  --chat--button--background--primary--hover: var(--chat--color-secondary-shade-50);\n  --chat--button--border--primary--hover: none;\n  --chat--button--color--primary--disabled: var(--chat--color-light);\n  --chat--button--background--primary--disabled: #81bbb1;\n  --chat--button--border--primary--disabled: none;\n  --chat--button--color--secondary: var(--chat--color-light);\n  --chat--button--background--secondary: hsl(0, 0%, 58%);\n  --chat--button--border--secondary: none;\n  --chat--button--color--secondary--hover: var(--chat--color-light);\n  --chat--button--background--secondary--hover: hsl(0, 0%, 51%);\n  --chat--button--border--secondary--hover: none;\n  --chat--button--color--secondary--disabled: var(--chat--color-light);\n  --chat--button--background--secondary--disabled: hsl(0, 0%, 78%);\n  --chat--button--border--secondary--disabled: none;\n  --chat--close--button--color-hover: var(--chat--color--primary);\n\n  /* Send and File Buttons */\n  --chat--input--send--button--background: var(--chat--color-white);\n  --chat--input--send--button--color: var(--chat--color--secondary);\n  --chat--input--send--button--background-hover: var(--chat--color--primary-shade-50);\n  --chat--input--send--button--color-hover: var(--chat--color-secondary-shade-50);\n  --chat--input--file--button--background: var(--chat--color-white);\n  --chat--input--file--button--color: var(--chat--color--secondary);\n  --chat--input--file--button--background-hover: var(--chat--input--file--button--background);\n  --chat--input--file--button--color-hover: var(--chat--color-secondary-shade-50);\n  --chat--files-spacing: 0.25rem;\n\n  /* Body and Footer */\n  --chat--body--background: var(--chat--color-light);\n  --chat--footer--background: var(--chat--color-light);\n  --chat--footer--color: var(--chat--color-dark);\n}\n\n\n/* You can override any class styles, too. Right-click inspect in Chat UI to find class to override. */\n.chat-message {\n\tmax-width: 50%;\n}",
+          "responseMode": "streaming"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.4,
+      "position": [
+        0,
+        0
+      ],
+      "id": "36bd9ac8-5a3f-40b3-ac60-b20abb43e8cc",
+      "name": "When chat message received",
+      "webhookId": "d825cd48-7ad1-4949-8de0-c3c810265b0b",
+      "alwaysOutputData": true,
+      "executeOnce": false,
+      "notesInFlow": true,
+      "credentials": {
+        "httpBasicAuth": {
+          "id": "GdjW1odXR5OQpOuf",
+          "name": "Unnamed credential"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "hasOutputParser": true,
+        "options": {
+          "systemMessage": "You are \"Ekatva AI Assistant\" — the official AI assistant for Ekatva Technovation's Smart Tank Monitoring System.\n\n## Company Context\nEkatva Technovation is a robotics and IoT technology company specializing in smart sensor systems, industrial automation, real-time monitoring platforms, and connected IoT infrastructure. Their flagship product is the Smart Tank Monitoring System — used across Oil & Gas, Chemical, Dairy, Food, Pharma, Water Treatment, Power Generation, Manufacturing, Brewing, Edible Oil, and Mining industries.\n\nAddress: Block-A, 1107, Rajyash Rise, Nr. APMC Market, Vishala Cross Road, South Vasana, Ahmedabad-380007\nContact: +91 99987 68805 | contact@ekatvatechnovation.com\n\n## System Capabilities (for reference when answering questions)\n- Real-Time Monitoring: live level tracking with instant low-level alerts\n- Temperature & Pressure Monitoring: thermal and pressure analysis with automatic alerts\n- Smart Alert System: instant mobile/web notifications for abnormal conditions\n- Multi-Tank Management: centralized dashboard for multiple tanks/locations\n- Web Dashboard + Mobile App (Android): live status, alarms, trends, reports\n- Historical Data & Trend Analytics: usage patterns, consumption tracking\n- User Access Control: role-based access (admin/operator/management)\n- Industrial IoT Integration: works with SCADA, ERP, and existing industrial infrastructure\n- Reports: exportable as PDF/CSV, filterable by tank/date range\n\n## Sensor Hardware — VEGAPULS 21 (Radar Level Sensor)\nThis is the core sensing device used in the system.\n- Type: Non-contact radar sensor, two-wire 4-20 mA/HART\n- Measuring range: up to 20 m\n- Accuracy/Deviation: ≤ 2 mm\n- Measuring frequency: 80 GHz (W-band)\n- Beam angle: 8°\n- Process fitting: Thread G1½, 1½ NPT, or R1½\n- Process pressure range: -1 to +3 bar\n- Process temperature range: -40°C to +80°C\n- Ambient temperature range: -40°C to +70°C\n- Operating voltage: 12-35 V DC\n- Protection rating: IP66/IP67\n- Wetted parts material: PVDF; process seal: FKM\n- Adjustment: via Bluetooth 5.0 (app-based, ~25m range), VEGACONNECT + PACTware/DTM, or HART Communicator\n- Ideal for: water treatment, acid/lye storage tanks, plastic tanks/IBC containers, liquids, and small bulk solids\n\n## Your Role\n- Answer questions about the Ekatva Smart Tank Monitoring System (features, capabilities, industries, dashboard) using the Company Context above\n- Answer sensor/hardware questions using the VEGAPULS 21 specs above\n- When live/current sensor data is provided in the input (tank ID, volume, temperature, status, timestamp), treat that as the source of truth for that specific tank and prioritize it over general specs\n- If asked about a specific tank's current status, ALWAYS include: Tank ID, Current Volume, Min/Max Volume, Temperature, Status (Normal/Alert), and Last Reading timestamp — if available in the input\n- If a value is abnormal (level above max, temperature above max threshold, tank offline), clearly flag it as an ALERT in your response\n- Never fabricate sensor readings, thresholds, or specs not present in the provided data or this system message\n- If information isn't available, say so clearly: \"This information is not available in current records\"\n\n## Output Rules\n- Default: clear, concise plain text\n- For status reports: use a structured format (Parameter | Value)\n- For technical/sensor questions: be precise with units (L, °C, mm, bar)\n- Tone: Professional but approachable — this may be used by both technical engineers and non-technical operations staff",
+          "returnIntermediateSteps": true,
+          "tracingMetadata": {
+            "values": [
+              {}
+            ]
+          },
+          "autoSaveHighlightedData": false,
+          "enableStreaming": true
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        208,
+        0
+      ],
+      "id": "cbddd2c0-a1d8-4879-bb61-570f54e93bfe",
+      "name": "AI Agent",
+      "alwaysOutputData": false
+    },
+    {
+      "parameters": {
+        "model": "llama-3.3-70b-versatile",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGroq",
+      "typeVersion": 1,
+      "position": [
+        48,
+        208
+      ],
+      "id": "6985866b-d3bc-4edb-98b0-24b303507a65",
+      "name": "Groq Chat Model",
+      "credentials": {
+        "groqApi": {
+          "id": "GqQaGfL98UDCFf4j",
+          "name": "Groq account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "contextWindowLength": 111111
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.4,
+      "position": [
+        192,
+        208
+      ],
+      "id": "45cabe0f-ea9a-4941-bedc-19c35b8e76e9",
+      "name": "Simple Memory"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Groq Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "7438077f-eacd-4824-91ea-34acbe96ba50",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "ea9d2983b127b8c61e6f34534bd7a101fd62dc209348535e812cc04562f3154f"
+  },
+  "nodeGroups": [],
+  "id": "xdvCDTSPn7f8qSjX",
+  "tags": []
+}
