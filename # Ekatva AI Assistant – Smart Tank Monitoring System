@@ -1,1 +1,65 @@
+# Ekatva AI Assistant – Smart Tank Monitoring System
 
+An AI assistant designed as a customized company-specific assistant
+for Ekatva Technovation's Smart Tank Monitoring System.
+
+## Project Objective
+
+The Ekatva AI Assistant was designed to provide structured information
+and support around the Smart Tank Monitoring System.
+
+## Key Features
+
+- Password-protected access
+- Customized AI assistant behavior
+- Company-specific instructions
+- Smart Tank Monitoring System information
+- Real-time level monitoring information
+- Temperature and pressure monitoring information
+- Smart alert system information
+- Multi-tank management information
+- Web dashboard and Android mobile app information
+
+## Smart Tank Monitoring System Capabilities
+
+### Real-Time Monitoring
+Live level tracking with instant low-level alerts.
+
+### Temperature & Pressure Monitoring
+Thermal and pressure analysis with automatic alerts.
+
+### Smart Alert System
+Instant mobile and web notifications for abnormal conditions.
+
+### Multi-Tank Management
+Centralized dashboard for multiple tanks and locations.
+
+### Web Dashboard + Mobile App
+Live status, alarms, trends, and reports.
+
+## Target Industries
+
+- Oil & Gas
+- Chemical
+- Dairy
+- Food
+- Pharma
+- Water Treatment
+- Power Generation
+- Manufacturing
+- Brewing
+- Edible Oil
+- Mining
+
+## Project Screenshots
+
+Screenshots demonstrating the authentication,
+AI assistant interface, and customized AI behavior
+are included in this repository.
+
+## What I Learned
+
+- Customized AI assistant configuration
+- Access-controlled AI interaction
+- Domain-specific AI instructions
+- Structuring AI knowledge for a specific industrial product
